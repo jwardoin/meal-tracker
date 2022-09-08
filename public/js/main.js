@@ -24,9 +24,11 @@ async function sendData() {
   console.log(existingDays);
 
   // Check if date exists - if so, make a PUT request to update, and if not, make a POST request to create
+  let entryDateId;
   let httpRequest;
   if (existingDays.some((day) => day.dataset.date === date)) {
     httpRequest = 'put';
+    entryDateId = existingDays[existingDays.findIndex(day => day.dataset.date === date)].dataset.id;
   } else {
     httpRequest = 'post';
   }
@@ -36,6 +38,7 @@ async function sendData() {
       method: httpRequest,
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
+        id: entryDateId,
         date: date,
         mealType: mealType,
         foodItems: foodItems,

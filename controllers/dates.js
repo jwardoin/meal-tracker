@@ -31,7 +31,7 @@ module.exports = {
   updateDate: async (req, res) => {
     try {
       await Date.findOneAndUpdate(
-        { date: req.body.date },
+        { _id: req.body.id },
         {
           [req.body.mealType]: req.body.foodItems,
         }
